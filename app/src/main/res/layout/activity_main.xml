@@ -41,14 +41,11 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
         android:id="@+id/message"
         android:layout_above="@+id/button"
-        android:layout_marginBottom="49dp"
-        android:layout_alignRight="@+id/q"
-        android:layout_alignEnd="@+id/q"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/q"
+        android:layout_alignEnd="@+id/q" />
 
 </RelativeLayout>

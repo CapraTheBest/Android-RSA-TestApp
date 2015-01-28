@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.*;
 
+import java.math.BigInteger;
+import java.util.Random;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -46,19 +49,64 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void encript(View view){
-        InputMethodManager inputManager =
-                (InputMethodManager) this.
-                        getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputManager.hideSoftInputFromWindow(
-                this.getCurrentFocus().getWindowToken(),
-                InputMethodManager.HIDE_NOT_ALWAYS);
+        try {
+            InputMethodManager inputManager =
+                    (InputMethodManager) this.
+                            getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(
+                    this.getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+        } catch(Exception e) {
+            // Do nothing;
+        }
+        String P = ((EditText) findViewById(R.id.p)).getText().toString();
+        String Q = ((EditText) findViewById(R.id.q)).getText().toString();
 
-        int p = Integer.parseInt(((EditText) findViewById(R.id.p)).getText().toString());
-        int q = Integer.parseInt(((EditText) findViewById(R.id.q)).getText().toString());
-        int m = Integer.parseInt(((EditText) findViewById(R.id.message)).getText().toString());
-
+        String m = ((EditText) findViewById(R.id.message)).getText().toString();
+/*
         int f = (p-1)*(q-1);
+*/
 
-        // Trovare e
+
+        BigInteger p, q;
+        BigInteger n;
+        BigInteger PhiN;
+        BigInteger e, d;
+
+        int SIZE = 512;
+        /* Step 1: Select two large prime numbers. Say p and q. */
+        p = new BigInteger(P);
+        q = new BigInteger(Q);
+        /* Step 2: Calculate n = p.q */
+        n = p.multiply(q);
+        /* Step 3: Calculate ø(n) = (p - 1).(q - 1) */
+        PhiN = p.subtract(BigInteger.valueOf(1));
+        PhiN = PhiN.multiply(q.subtract(BigInteger.valueOf(1)));
+        /* Step 4: Find e such that gcd(e, ø(n)) = 1 ; 1 < e < ø(n) */
+        do {
+            e = new BigInteger(2 * SIZE, new Random());
+        } while ((e.compareTo(PhiN) != 1)
+                || (e.gcd(PhiN).compareTo(BigInteger.valueOf(1)) != 0));
+        /* Step 5: Calculate d such that e.d = 1 (mod ø(n)) */
+        d = e.modInverse(PhiN);
+
+
+
+        BigInteger bplaintext, bciphertext;
+        // FIXME: Convertire m in decimale
+        bplaintext = BigInteger.valueOf((long) m);
+        bciphertext = encrypt(e, n, bplaintext);
+       // System.out.println("Plaintext : " + bplaintext.toString());
+       // System.out.println("Ciphertext : " + bciphertext.toString());
+        bplaintext = decrypt(d, n, bciphertext);
+        Toast.makeText(this, bplaintext.toString(), Toast.LENGTH_LONG).show();
+    }
+
+    public BigInteger encrypt(BigInteger e, BigInteger n, BigInteger plaintext) {
+        return plaintext.modPow(e, n);
+    }
+
+    public BigInteger decrypt(BigInteger d, BigInteger n, BigInteger ciphertext) {
+        return ciphertext.modPow(d, n);
     }
 }
