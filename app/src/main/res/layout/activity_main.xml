@@ -24,8 +24,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/button"
-        android:layout_toStartOf="@+id/button"
-        android:singleLine="true" />
+        android:layout_toStartOf="@+id/button" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -35,8 +34,7 @@
         android:id="@+id/q"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/button"
-        android:layout_toEndOf="@+id/button"
-        android:singleLine="true" />
+        android:layout_toEndOf="@+id/button" />
 
     <EditText
         android:layout_width="wrap_content"
