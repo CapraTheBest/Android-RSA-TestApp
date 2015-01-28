@@ -8,11 +8,12 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cripta"
+        android:text="@string/button"
         android:id="@+id/button"
         android:onClick="encript"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="65dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -20,12 +21,12 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/p"
-        android:layout_alignParentTop="true"
+        android:singleLine="true"
+        android:layout_alignTop="@+id/q"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/button"
-        android:layout_toStartOf="@+id/button"
-        android:singleLine="true" />
+        android:layout_toStartOf="@+id/button" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -33,19 +34,22 @@
         android:inputType="numberSigned"
         android:ems="10"
         android:id="@+id/q"
+        android:singleLine="true"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/button"
         android:layout_toEndOf="@+id/button"
-        android:singleLine="true" />
+        android:layout_marginTop="77dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/message"
-        android:layout_above="@+id/button"
+        android:layout_below="@+id/p"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_marginTop="74dp"
         android:layout_alignRight="@+id/q"
-        android:layout_alignEnd="@+id/q" />
+        android:layout_alignEnd="@+id/q"
+        android:singleLine="true" />
 
 </RelativeLayout>
