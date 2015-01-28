@@ -60,7 +60,7 @@ public class MainActivity extends ActionBarActivity {
         int f = (p-1)*(q-1);
 
         for(int i = f - 1; i > 0; i--) {
-            
+
         }
     }
 }
