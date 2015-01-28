@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.math.BigInteger;
+import java.nio.charset.Charset;
+import java.util.Locale;
 import java.util.Random;
 
 
@@ -66,7 +68,7 @@ public class MainActivity extends ActionBarActivity {
         BigInteger p, q;
         BigInteger n;
         BigInteger PhiN;
-        BigInteger e = new BigInteger("0"), d;
+        BigInteger e, d;
 
         int SIZE = 512;
         /* Step 1: Select two large prime numbers. Say p and q. */
@@ -77,22 +79,27 @@ public class MainActivity extends ActionBarActivity {
         /* Step 3: Calculate ø(n) = (p - 1).(q - 1) */
         PhiN = p.subtract(BigInteger.valueOf(1));
         PhiN = PhiN.multiply(q.subtract(BigInteger.valueOf(1)));
+        e = new BigInteger("" + (PhiN.subtract(BigInteger.valueOf(1))));
         /* Step 4: Find e such that gcd(e, ø(n)) = 1 ; 1 < e < ø(n) */
-        while ((e.compareTo(PhiN) != 1)
-                || (e.gcd(PhiN).compareTo(BigInteger.valueOf(1)) != 0)) {
-            e = new BigInteger(1 + e.toString() + "");
+        while (!(e.compareTo(PhiN) != 1) && (e.gcd(PhiN).equals(BigInteger.valueOf(1)))) {
+            e = e.subtract(BigInteger.valueOf(1));
         }
         /* Step 5: Calculate d such that e.d = 1 (mod ø(n)) */
+        // FIXME: questo qui non va
         d = e.modInverse(PhiN);
 
         BigInteger bplaintext, bciphertext;
         // Converte m in hex
-        bplaintext = BigInteger.valueOf(Long.parseLong(toHex(m)));
+        // Long l = Long.parseLong(toHex(m));
+        bplaintext = BigInteger.valueOf(Integer.parseInt(m));
         bciphertext = encrypt(e, n, bplaintext);
        // System.out.println("Plaintext : " + bplaintext.toString());
        // System.out.println("Ciphertext : " + bciphertext.toString());
         bplaintext = decrypt(d, n, bciphertext);
-        Toast.makeText(this, bciphertext.toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Chiave pubblica: (" + e + "; " + n + ")\n" +
+                            "Chiave privata: (" + d + "; " + n + ")\n" +
+                            bciphertext.toString() + "\n" +
+                            bplaintext, Toast.LENGTH_LONG).show();
     }
 
     public BigInteger encrypt(BigInteger e, BigInteger n, BigInteger plaintext) {
@@ -104,6 +111,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public String toHex(String arg) {
-        return String.format("%040x", new BigInteger(1, arg.getBytes()));
+        return String.format(Locale.ITALY, "%040x", new BigInteger(1, arg.getBytes(Charset.defaultCharset())));
     }
 }
