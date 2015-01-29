@@ -5,5 +5,8 @@
     <string name="action_settings">Impostazioni</string>
     <string name="easter_egg" translatable="false">Penis</string>
     <string name="button">Cripta</string>
+    <string name="p" translatable="false">P</string>
+    <string name="q" translatable="false">Q</string>
+    <string name="m" translatable="false">M</string>
 
 </resources>

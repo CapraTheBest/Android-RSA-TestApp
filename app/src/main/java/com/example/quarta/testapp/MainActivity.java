@@ -57,78 +57,14 @@ public class MainActivity extends ActionBarActivity {
         } catch(Exception e) {
             // Do nothing;
         }
-        String P = ((EditText) findViewById(R.id.p)).getText().toString();
-        String Q = ((EditText) findViewById(R.id.q)).getText().toString();
+        int p = Integer.parseInt(((EditText) findViewById(R.id.p)).getText().toString());
+        int q = Integer.parseInt(((EditText) findViewById(R.id.q)).getText().toString());
+        int m = Integer.parseInt(((EditText) findViewById(R.id.message)).getText().toString());
 
-        String m = ((EditText) findViewById(R.id.message)).getText().toString();
-/*
-        int f = (p-1)*(q-1);
-*/
+        RSA encrypt = new RSA(p, q, m);
 
-
-        BigInteger p, q;
-        BigInteger n;
-        BigInteger PhiN;
-        BigInteger e, d;
-
-        int SIZE = 512;
-        /* Step 1: Select two large prime numbers. Say p and q. */
-        p = new BigInteger(P);
-        q = new BigInteger(Q);
-        /* Step 2: Calculate n = p.q */
-        n = p.multiply(q);
-        /* Step 3: Calculate ø(n) = (p - 1).(q - 1) */
-        PhiN = p.subtract(BigInteger.valueOf(1));
-        PhiN = PhiN.multiply(q.subtract(BigInteger.valueOf(1)));
-        e = new BigInteger("" + (PhiN.subtract(BigInteger.valueOf(1))));
-        /* Step 4: Find e such that gcd(e, ø(n)) = 1 ; 1 < e < ø(n) */
-        boolean ok = false;
-        while (!((e.compareTo(PhiN) != 1) && (e.gcd(PhiN).equals(BigInteger.valueOf(1)))) && ok) {
-            if(!((e.compareTo(PhiN) != 1) && (e.gcd(PhiN).equals(BigInteger.valueOf(1)))))
-                ok = true;
-            e = e.subtract(BigInteger.valueOf(1));
-
-        }
-        /* Step 5: Calculate d such that e.d = 1 (mod ø(n)) */
-        // FIXME: questo qui non va
-        d = findD(e, PhiN);
-
-        BigInteger bplaintext, bciphertext;
-        // Converte m in hex
-        // Long l = Long.parseLong(toHex(m));
-        bplaintext = BigInteger.valueOf(Integer.parseInt(m));
-        bciphertext = encrypt(e, n, bplaintext);
-       // System.out.println("Plaintext : " + bplaintext.toString());
-       // System.out.println("Ciphertext : " + bciphertext.toString());
-        bplaintext = decrypt(d, n, bciphertext);
-        Toast.makeText(this, "Chiave pubblica: (" + e + "; " + n + ")\n" +
-                            "Chiave privata: (" + d + "; " + n + ")\n" +
-                            bciphertext.toString() + "\n" +
-                            bplaintext, Toast.LENGTH_LONG).show();
-    }
-
-    public BigInteger encrypt(BigInteger e, BigInteger n, BigInteger plaintext) {
-        return plaintext.modPow(e, n);
-    }
-
-    public BigInteger decrypt(BigInteger d, BigInteger n, BigInteger ciphertext) {
-        return ciphertext.modPow(d, n);
-    }
-
-    public String toHex(String arg) {
-        return String.format(Locale.ITALY, "%040x", new BigInteger(1, arg.getBytes(Charset.defaultCharset())));
-    }
-
-    public BigInteger findD(BigInteger e, BigInteger PhiN) {
-        BigInteger d = new BigInteger("0");
-        int k = 1;
-        while(true) {
-            double i = ((k * PhiN.intValue()) + 1) / e.intValue();
-            if(i == (int)i) {
-                d.add(new BigInteger((int)i + ""));
-                return d;
-            }
-            k++;
-        }
+        Toast.makeText(this, "Chiave pubblica: (" + encrypt.getE() + "; " + encrypt.getN() + ")\n" +
+                            "Chiave privata: (" + encrypt.getD() + "; " + encrypt.getN() + ")\n" +
+                            "Cifrato: " + encrypt.getC(), Toast.LENGTH_LONG).show();
     }
 }
