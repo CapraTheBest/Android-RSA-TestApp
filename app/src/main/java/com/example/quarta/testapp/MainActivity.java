@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.Locale;
@@ -81,12 +82,16 @@ public class MainActivity extends ActionBarActivity {
         PhiN = PhiN.multiply(q.subtract(BigInteger.valueOf(1)));
         e = new BigInteger("" + (PhiN.subtract(BigInteger.valueOf(1))));
         /* Step 4: Find e such that gcd(e, ø(n)) = 1 ; 1 < e < ø(n) */
-        while (!(e.compareTo(PhiN) != 1) && (e.gcd(PhiN).equals(BigInteger.valueOf(1)))) {
+        boolean ok = false;
+        while (!((e.compareTo(PhiN) != 1) && (e.gcd(PhiN).equals(BigInteger.valueOf(1)))) && ok) {
+            if(!((e.compareTo(PhiN) != 1) && (e.gcd(PhiN).equals(BigInteger.valueOf(1)))))
+                ok = true;
             e = e.subtract(BigInteger.valueOf(1));
+
         }
         /* Step 5: Calculate d such that e.d = 1 (mod ø(n)) */
         // FIXME: questo qui non va
-        d = e.modInverse(PhiN);
+        d = findD(e, PhiN);
 
         BigInteger bplaintext, bciphertext;
         // Converte m in hex
@@ -112,5 +117,18 @@ public class MainActivity extends ActionBarActivity {
 
     public String toHex(String arg) {
         return String.format(Locale.ITALY, "%040x", new BigInteger(1, arg.getBytes(Charset.defaultCharset())));
+    }
+
+    public BigInteger findD(BigInteger e, BigInteger PhiN) {
+        BigInteger d = new BigInteger("0");
+        int k = 1;
+        while(true) {
+            double i = ((k * PhiN.intValue()) + 1) / e.intValue();
+            if(i == (int)i) {
+                d.add(new BigInteger((int)i + ""));
+                return d;
+            }
+            k++;
+        }
     }
 }
