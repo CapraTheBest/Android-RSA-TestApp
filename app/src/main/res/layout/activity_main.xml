@@ -21,11 +21,12 @@
         android:ems="10"
         android:id="@+id/p"
         android:singleLine="true"
-        android:layout_alignTop="@+id/q"
+        android:layout_alignBaseline="@+id/q"
+        android:layout_alignBottom="@+id/q"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/button"
-        android:layout_toStartOf="@+id/button" />
+        android:layout_toStartOf="@+id/button"
+        android:layout_toLeftOf="@+id/button" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -34,21 +35,22 @@
         android:ems="10"
         android:id="@+id/q"
         android:singleLine="true"
+        android:layout_marginTop="42dp"
         android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_toRightOf="@+id/button"
-        android:layout_toEndOf="@+id/button"
-        android:layout_marginTop="77dp" />
+        android:layout_toEndOf="@+id/button" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/message"
-        android:layout_below="@+id/p"
+        android:singleLine="true"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="74dp"
-        android:layout_alignRight="@+id/q"
-        android:layout_alignEnd="@+id/q"
-        android:singleLine="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
