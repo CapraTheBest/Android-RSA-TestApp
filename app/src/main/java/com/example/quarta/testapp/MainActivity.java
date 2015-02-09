@@ -1,6 +1,7 @@
 package com.example.quarta.testapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -42,8 +43,8 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Toast.makeText(this, "Penis", Toast.LENGTH_SHORT).show();
-            return true;
+            Intent inent = new Intent(this, EasterEgg.class);
+            startActivity(inent);
         }
 
         return super.onOptionsItemSelected(item);
