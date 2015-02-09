@@ -1,0 +1,53 @@
+flappy.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+pipe1
+  rotate: false
+  xy: 674, 482
+  size: 52, 320
+  orig: 52, 320
+  offset: 0, 0
+  index: -1
+pipe2
+  rotate: false
+  xy: 728, 482
+  size: 52, 320
+  orig: 52, 320
+  offset: 0, 0
+  index: -1
+bird1
+  rotate: false
+  xy: 322, 0
+  size: 34, 24
+  orig: 34, 24
+  offset: 0, 0
+  index: -1
+land
+  rotate: false
+  xy: 0, 482
+  size: 672, 112
+  orig: 672, 112
+  offset: 0, 0
+  index: -1
+bird2
+  rotate: false
+  xy: 358, 0
+  size: 34, 24
+  orig: 34, 24
+  offset: 0, 0
+  index: -1
+bird3
+  rotate: false
+  xy: 394, 0
+  size: 34, 24
+  orig: 34, 24
+  offset: 0, 0
+  index: -1
+background
+  rotate: false
+  xy: 0, 0
+  size: 320, 480
+  orig: 320, 480
+  offset: 0, 0
+  index: -1
