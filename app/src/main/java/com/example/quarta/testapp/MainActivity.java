@@ -20,6 +20,8 @@ import java.util.Random;
 
 public class MainActivity extends ActionBarActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,10 +64,10 @@ public class MainActivity extends ActionBarActivity {
         int q = Integer.parseInt(((EditText) findViewById(R.id.q)).getText().toString());
         int m = Integer.parseInt(((EditText) findViewById(R.id.message)).getText().toString());
 
-        RSA encrypt = new RSA(p, q, m);
-
-        Toast.makeText(this, "Chiave pubblica: (" + encrypt.getE() + "; " + encrypt.getN() + ")\n" +
-                            "Chiave privata: (" + encrypt.getD() + "; " + encrypt.getN() + ")\n" +
-                            "Cifrato: " + encrypt.getC(), Toast.LENGTH_LONG).show();
+        Intent result = new Intent (this, Result.class);
+        result.putExtra("p", p);
+        result.putExtra("q", q);
+        result.putExtra("m", m);
+        startActivity(result);
     }
 }
