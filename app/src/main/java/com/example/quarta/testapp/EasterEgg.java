@@ -12,6 +12,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.util.Random;
+
 
 public class EasterEgg extends ActionBarActivity {
 
@@ -27,6 +29,13 @@ public class EasterEgg extends ActionBarActivity {
         setContentView(R.layout.activity_easter_egg);
 
         imageView = (ImageView) findViewById(R.id.animatedImage);
+
+        if(new Random().nextInt(2) == 0) {
+            imageView.setImageResource(R.drawable.ic_launcher3);
+        }
+        else {
+            imageView.setImageResource(R.drawable.ic_launcher4);
+        }
 
         animationView = (ImageView) findViewById(R.id.background);
         animationView.setBackgroundResource(R.anim.background_animation);

@@ -14,7 +14,9 @@
         android:layout_marginTop="32dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -24,7 +26,9 @@
         android:layout_below="@+id/pub_key"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="45dp" />
+        android:layout_marginTop="45dp"
+        android:layout_alignRight="@+id/pub_key"
+        android:layout_alignEnd="@+id/pub_key" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,6 +38,8 @@
         android:layout_below="@+id/priv_key"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="70dp" />
+        android:layout_marginTop="70dp"
+        android:layout_alignRight="@+id/priv_key"
+        android:layout_alignEnd="@+id/priv_key" />
 
 </RelativeLayout>
