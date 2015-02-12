@@ -15,7 +15,6 @@
     <ImageView android:id="@+id/animatedImage"
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/ic_launcher4"/>
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>
