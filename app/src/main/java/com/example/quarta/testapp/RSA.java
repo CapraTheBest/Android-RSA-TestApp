@@ -1,6 +1,8 @@
 package com.example.quarta.testapp;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Utente on 29/01/2015.
@@ -14,8 +16,8 @@ public class RSA {
     private BigInteger e;
     private BigInteger d;
 
-    private BigInteger m;
-    private BigInteger c;
+    private BigInteger[] m;
+    private BigInteger[] c;
 
     public RSA(int p, int q, int m) {
         setP(p);
@@ -26,11 +28,11 @@ public class RSA {
         setE();
         setD();
 
-        setM(BigInteger.valueOf(m));
+        setM(new BigInteger[] {BigInteger.valueOf(m)});
         setC();
     }
 
-    /*public RSA(int p, int q, String m) {
+    public RSA(int p, int q, String m) {
         setP(p);
         setQ(q);
         setN();
@@ -39,15 +41,20 @@ public class RSA {
         setE();
         setD();
 
+        List<BigInteger> list = new ArrayList<BigInteger>();
+
         char[] charArray = m.toCharArray();
-        StringBuffer sb = new StringBuffer();
         for (char c : charArray) {
-            sb.append((int)c);
+            list.add(BigInteger.valueOf((long) c));
         }
 
-        setM(BigInteger.valueOf(Integer.parseInt(sb.toString())));
+        BigInteger[] array = list.toArray(new BigInteger[list.size()]);
+
+
+
+        setM(array);
         setC();
-    }*/
+    }
 
     public int getP() {
         return p;
@@ -73,12 +80,18 @@ public class RSA {
         return d;
     }
 
-    public BigInteger getM() {
+    public BigInteger[] getM() {
         return m;
     }
 
-    public BigInteger getC() {
-        return c;
+    public String getC() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < c.length; i ++) {
+            sb.append((char) (c[i].intValue()));
+        }
+
+        return sb.toString();
     }
 
     public void setP(int p) {
@@ -108,11 +121,14 @@ public class RSA {
         d = e.modInverse(f);
     }
 
-    public void setM(BigInteger m) {
+    public void setM(BigInteger[] m) {
         this.m = m;
     }
 
     public void setC() {
-        c = m.modPow(e, n);
+        c = new BigInteger[m.length];
+       for(int i = 0; i < getM().length; i ++) {
+           c[i] = m[i].modPow(e, n);
+       }
     }
 }

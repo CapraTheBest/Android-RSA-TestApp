@@ -67,21 +67,17 @@ public class MainActivity extends ActionBarActivity {
         if (p.matches("")) {
             Toast.makeText(this, "Inseririsci il Seme P", Toast.LENGTH_SHORT).show();
             return;
-        }
-
-        if (q.matches("")) {
+        } else if (q.matches("")) {
             Toast.makeText(this, "Inseririsci il Seme Q", Toast.LENGTH_SHORT).show();
             return;
-        }
-
-        if (m.matches("")) {
+        } else if (m.matches("")) {
             Toast.makeText(this, "Inserisci il messaggio", Toast.LENGTH_SHORT).show();
             return;
         }
 
         Intent result = new Intent (this, Result.class);
-        result.putExtra("p", p);
-        result.putExtra("q", q);
+        result.putExtra("p", Integer.parseInt(p));
+        result.putExtra("q", Integer.parseInt(q));
         result.putExtra("m", m);
         startActivity(result);
     }

@@ -49,7 +49,7 @@
         android:layout_alignEnd="@+id/q"
         android:layout_alignLeft="@+id/q"
         android:layout_alignStart="@+id/q"
-        android:inputType="number" />
+        android:inputType="text" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -20,7 +20,7 @@ public class Result extends ActionBarActivity {
         Intent intent = getIntent();
         int p = intent.getIntExtra("p", 3);
         int q = intent.getIntExtra("q", 5);
-        int m = intent.getIntExtra("m", 2);
+        String m = intent.getStringExtra("m");
 
         RSA encrypt = new RSA(p, q, m);
 
