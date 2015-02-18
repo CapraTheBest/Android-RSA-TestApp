@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
+import java.sql.Time;
 import java.util.Locale;
 import java.util.Random;
 
@@ -60,9 +61,23 @@ public class MainActivity extends ActionBarActivity {
         } catch(Exception e) {
             // Do nothing;
         }
-        int p = Integer.parseInt(((EditText) findViewById(R.id.p)).getText().toString());
-        int q = Integer.parseInt(((EditText) findViewById(R.id.q)).getText().toString());
-        int m = Integer.parseInt(((EditText) findViewById(R.id.message)).getText().toString());
+        String p = (((EditText) findViewById(R.id.p)).getText().toString());
+        String q = (((EditText) findViewById(R.id.q)).getText().toString());
+        String m = ((EditText) findViewById(R.id.message)).getText().toString();
+        if (p.matches("")) {
+            Toast.makeText(this, "Inseririsci il Seme P", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (q.matches("")) {
+            Toast.makeText(this, "Inseririsci il Seme Q", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (m.matches("")) {
+            Toast.makeText(this, "Inserisci il messaggio", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Intent result = new Intent (this, Result.class);
         result.putExtra("p", p);
