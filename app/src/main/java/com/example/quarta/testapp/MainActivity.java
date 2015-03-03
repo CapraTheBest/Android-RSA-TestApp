@@ -46,7 +46,7 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent inent = new Intent(this, EasterEgg.class);
+            Intent inent = new Intent(this, TakePictureActivity.class);
             startActivity(inent);
         }
 
