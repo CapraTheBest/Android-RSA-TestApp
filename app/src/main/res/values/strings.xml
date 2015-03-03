@@ -3,6 +3,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_result">Result</string>
+    <string name="action_photo">Take photo</string>
 
     <string name="hello_world">Hello world!</string>
 
