@@ -20,6 +20,12 @@ import java.util.Random;
 
 public class EasterEgg extends ActionBarActivity {
 
+    private static final int[] PICS_ID = {R.drawable.ic_launcher3, 
+                                          R.drawable.ic_launcher4, 
+                                          R.drawable.ic_launcher5, 
+                                          R.drawable.ic_launcher6
+                                         };
+    
     private MediaPlayer mPlayer;
     private ImageView imageView;
     private ImageView animationView;
@@ -33,19 +39,8 @@ public class EasterEgg extends ActionBarActivity {
 
         imageView = (ImageView) findViewById(R.id.animatedImage);
 
-        int x = new Random().nextInt(4);
-        if(x == 0) {
-            imageView.setImageResource(R.drawable.ic_launcher3);
-        }
-        else if (x == 1){
-            imageView.setImageResource(R.drawable.ic_launcher4);
-        }
-        else if (x == 2){
-            imageView.setImageResource(R.drawable.ic_launcher5);
-        }
-        else {
-            imageView.setImageResource(R.drawable.ic_launcher6);
-        }
+        int x = new Random().nextInt(PICS_ID.length);
+        imageView.setImage(PICS_ID[x]);
 
         animationView = (ImageView) findViewById(R.id.background);
         animationView.setBackgroundResource(R.anim.background_animation);
